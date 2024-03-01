@@ -1,14 +1,13 @@
 import streamlit as st
 
-def start_preprocessing(user_dataframe,number):
+
+
+
+
+def start_preprocessing(dataframe,features,number):
+    set_global(dataframe,features)
     if number is not None:
         st.write(number)
-        st.write(user_dataframe)
+        st.write(dataframe)
     else:
         st.write("Select the number of features...")
-
-
-
-def fill_null_categorical(dataframe,feature):
-    dataframe[feature] = dataframe[feature].fillna(dataframe[feature].mode())
-    return dataframe[feature]
