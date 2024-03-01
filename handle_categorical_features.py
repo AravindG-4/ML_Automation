@@ -1,22 +1,23 @@
 import pandas as pd
 import numpy as np
 import streamlit as st
+from categorical_helper_functions import *
 
-
-
-def get(dataframe,feature):
+def set_global(dataframe , features):
     global global_dataframe
     global global_features
-    global_dataframe = dataframe.copy()
-    global_features = feature.copy()
+    global global_categorical_features
+    global global_numerical_features
+    global_categorical_features = [ feature for feature in features if len(global_dataframe[feature]) <= 25]
+    global_numerical_features = [ feature for feature in features if len(global_dataframe[feature]) >= 25]
+    global_dataframe = dataframe
+    global_features = features
 
 
-def drop_categorical_feature(dataframe,feature):
+def handle_caterical_feature(dataframe,features):
+    set_global(dataframe,features)
+    global_dataframe = fill_categorical_na(global_dataframe,global_categorical_features)
+    global_dataframe = encode_features(features)
 
-    no_of_unique  = len(dataframe[feature].unique())
-    length_of_dataframe = len(dataframe)
-
-
-    if no_of_unique > (0.7 * length_of_dataframe):
-        global_dataframe[feature].drop(axis = 1 , inplace = True)
-        st.write(f"Dropped feature {feature} from Dataframe")
+def get_global():
+    return global_dataframe
