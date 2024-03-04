@@ -128,20 +128,20 @@ def get_target(features,dataframe) -> str :
 def get_user_features(independent_features,preferrence):
 
     if preferrence == 'Default':
-        return [independent_features,len(independent_features)]
+        return [independent_features,len(independent_features),preferrence]
     elif preferrence == 'Manual':
-        preferred = st.radio(
+        preferrence = st.radio(
         'Select your preferrence',
         options = ["Selct Number of Features", "Select Own features"],
         captions = ["Features with high correlation will be selected(recommended)", "Select the preferred features"])
-        if preferred == "Selct Number of Features":
+        if preferrence == "Selct Number of Features":
             number = st.number_input("Enter number of fatures to be used", value=None, placeholder="Type a number...",step = 1)
 
-            return [independent_features,number]
+            return [independent_features,number,preferrence]
             
         else:
             selected_independent_features = st.multiselect("Select the prefered features",independent_features)
-            return [selected_independent_features,len(selected_independent_features)]
+            return [selected_independent_features,len(selected_independent_features),preferrence]
 
 
 

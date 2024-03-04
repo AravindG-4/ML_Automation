@@ -57,7 +57,7 @@ if uploaded_file is not None:
         # Feature selection acording to the user
     if independent_features is not None:
         l = get_user_features(independent_features,preferrence)
-        user_preferred_features, number = l[0],l[1]
+        user_preferred_features, number , preferrence = l[0],l[1],l[2]
         if number is not None:
             st.write("The number of selected features:",number)
 
@@ -72,4 +72,4 @@ if uploaded_file is not None:
     if user_dataframe is not None:
         if check_problem_type(dataframe,target,user_preferred_features,number):
             if st.button('Start Preprocessing'):
-                start_preprocessing(user_dataframe,number)
+                start_preprocessing(dataframe,features,number,preferrence,target)
