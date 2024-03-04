@@ -16,6 +16,7 @@ def update_features(features):
 
 
 def get_categorical_dataframe():
+    st.write("Returned preprocessed dataframe")
     return global_dataframe
 
 def get_categorical_features():

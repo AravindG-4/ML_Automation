@@ -24,7 +24,7 @@ import handle_categorical_features
 # To fill the categorical features with low number of missing values
 
 def fill_categorical_null(dataframe,feature):
-
+    st.write(f"In fill categorical null {feature}")
 
     if dataframe[feature].isnull().sum() < (0.35 * len(dataframe)):
         
@@ -35,7 +35,7 @@ def fill_categorical_null(dataframe,feature):
         handle_categorical_features.update_dataframe(dataframe)    
         print(f"Filled null values of feature {feature} with class '{dataframe[feature].mode()[0]}'")
         print('After')
-        print(dataframe[feature])
+        st.write((dataframe[feature]))
         
 
     else:
