@@ -10,6 +10,7 @@ def get_numeric_dataframe(df, preference, target, num_feats, req_num_feats = Non
     # req_features = req_features
     req_num_feats = req_num_feats
     target = target
+    num_feats = [num_feat for num_feat in num_feats if num_feat != target]
     
     data = df[num_feats]
     
@@ -17,7 +18,6 @@ def get_numeric_dataframe(df, preference, target, num_feats, req_num_feats = Non
     # rows = df.shape[0]
     # columns = len(req_features)
     
-    num_feats = num_feats
     cat_feats = [feature for feature in df.columns if feature not in num_feats]
     
     null_percent = get_null_percent(data, num_feats)
