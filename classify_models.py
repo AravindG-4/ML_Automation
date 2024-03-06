@@ -92,7 +92,7 @@ def classification_models(x_train, y_train, x_test, y_test):
     st.write(classify_result_df)
     
     #Pickle files
-    pickles = {}
+    classify_pickles = {}
     
     pickle.dump(LogisticRegression, open('pickles\LogisticRegression.pkl', 'wb'))
     pickle.dump(DecisionTreeClassifier, open('pickles\DecisionTreeClassifier.pkl', 'wb'))
@@ -101,12 +101,12 @@ def classification_models(x_train, y_train, x_test, y_test):
     pickle.dump(AdaBoostClassifier, open('pickles\AdaBoostClassifier.pkl', 'wb'))
     pickle.dump(KNeighborsClassifier, open('pickles\KNeighborsClassifier.pkl', 'wb'))
     
-    pickles['LogisticRegression'] = 'pickles\LogisticRegression.pkl'
-    pickles['DecisionTreeClassifier'] = 'pickles\DecisionTreeClassifier.pkl'
-    pickles['RandomForestClassifier'] = 'pickles\RandomForestClassifier.pkl'
-    pickles['GradientBoostingClassifier'] = 'pickles\GradientBoostingClassifier.pkl'
-    pickles['AdaBoostClassifier'] = 'pickles\AdaBoostClassifier.pkl'
-    pickles['KNeighborsClassifier'] = 'pickles\KNeighborsClassifier.pkl'
+    classify_pickles['LogisticRegression'] = 'pickles\LogisticRegression.pkl'
+    classify_pickles['DecisionTreeClassifier'] = 'pickles\DecisionTreeClassifier.pkl'
+    classify_pickles['RandomForestClassifier'] = 'pickles\RandomForestClassifier.pkl'
+    classify_pickles['GradientBoostingClassifier'] = 'pickles\GradientBoostingClassifier.pkl'
+    classify_pickles['AdaBoostClassifier'] = 'pickles\AdaBoostClassifier.pkl'
+    classify_pickles['KNeighborsClassifier'] = 'pickles\KNeighborsClassifier.pkl'
     
-    return pickles
+    return classify_pickles
    
