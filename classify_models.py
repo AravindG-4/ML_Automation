@@ -19,77 +19,77 @@ def classification_models(x_train, y_train, x_test, y_test):
     # AdaBoostClassifier.fit(x_train,y_train)
     # KNeighborsClassifier.fit(x_train,y_train)
     
-    result = {'Models' : [], 'Accuracy': [], 'Precision': [], 'Recall': [], 'F1 Score': []}
+    classify_result = {'Models' : [], 'Accuracy': [], 'Precision': [], 'Recall': [], 'F1 Score': []}
     
     # LOGISTIC REGRESSION
     y_pred = LogisticRegression.predict(x_test)
     log_report = metrics.classification_report(y_test, y_pred, output_dict = True)
 
-    result['Models'].append("LogisticRegression") 
-    result['Accuracy'].append(log_report['accuracy'])
-    result['Precision'].append(log_report['macro avg']['precision'])
-    result['Recall'].append(log_report['macro avg']['recall'])
-    result['F1 Score'].append(log_report['macro avg']['f1-score'])
+    classify_result['Models'].append("LogisticRegression") 
+    classify_result['Accuracy'].append(log_report['accuracy'])
+    classify_result['Precision'].append(log_report['macro avg']['precision'])
+    classify_result['Recall'].append(log_report['macro avg']['recall'])
+    classify_result['F1 Score'].append(log_report['macro avg']['f1-score'])
 
 
    # DECISION TREE CLASSIFIER
     y_pred = DecisionTreeClassifier.predict(x_test)
     dt_report = metrics.classification_report(y_test, y_pred, output_dict = True)
     
-    result['Models'].append("DecisionTreeClassifier")
-    result['Accuracy'].append(dt_report['accuracy'])
-    result['Precision'].append(dt_report['macro avg']['precision'])
-    result['Recall'].append(dt_report['macro avg']['recall'])
-    result['F1 Score'].append(dt_report['macro avg']['f1-score'])
+    classify_result['Models'].append("DecisionTreeClassifier")
+    classify_result['Accuracy'].append(dt_report['accuracy'])
+    classify_result['Precision'].append(dt_report['macro avg']['precision'])
+    classify_result['Recall'].append(dt_report['macro avg']['recall'])
+    classify_result['F1 Score'].append(dt_report['macro avg']['f1-score'])
     
     # RANDOM FOREST CLASSIFIER
     y_pred = RandomForestClassifier.predict(x_test)
     rf_report = metrics.classification_report(y_test, y_pred, output_dict = True)
     
-    result['Models'].append("RandomForestClassifier") 
-    result['Accuracy'].append(rf_report['accuracy'])
-    result['Precision'].append(rf_report['macro avg']['precision'])
-    result['Recall'].append(rf_report['macro avg']['recall'])
-    result['F1 Score'].append(rf_report['macro avg']['f1-score'])
+    classify_result['Models'].append("RandomForestClassifier") 
+    classify_result['Accuracy'].append(rf_report['accuracy'])
+    classify_result['Precision'].append(rf_report['macro avg']['precision'])
+    classify_result['Recall'].append(rf_report['macro avg']['recall'])
+    classify_result['F1 Score'].append(rf_report['macro avg']['f1-score'])
 
     
     #GRADIENT BOOSTING CLASSIFIER
     y_pred = GradientBoostingClassifier.predict(x_test)
     gb_report = metrics.classification_report(y_test, y_pred, output_dict = True)
     
-    result['Models'].append("GradientBoostClassifier") 
-    result['Accuracy'].append(gb_report['accuracy'])
-    result['Precision'].append(gb_report['macro avg']['precision'])
-    result['Recall'].append(gb_report['macro avg']['recall'])
-    result['F1 Score'].append(gb_report['macro avg']['f1-score'])
+    classify_result['Models'].append("GradientBoostClassifier") 
+    classify_result['Accuracy'].append(gb_report['accuracy'])
+    classify_result['Precision'].append(gb_report['macro avg']['precision'])
+    classify_result['Recall'].append(gb_report['macro avg']['recall'])
+    classify_result['F1 Score'].append(gb_report['macro avg']['f1-score'])
 
     #ADABOOST CLASSIFIER
     y_pred = AdaBoostClassifier.predict(x_test)
     ada_report = metrics.classification_report(y_test, y_pred, output_dict = True)
     
-    result['Models'].append("AdaBoostClassifier") 
-    result['Accuracy'].append(ada_report['accuracy'])
-    result['Precision'].append(ada_report['macro avg']['precision'])
-    result['Recall'].append(ada_report['macro avg']['recall'])
-    result['F1 Score'].append(ada_report['macro avg']['f1-score'])
+    classify_result['Models'].append("AdaBoostClassifier") 
+    classify_result['Accuracy'].append(ada_report['accuracy'])
+    classify_result['Precision'].append(ada_report['macro avg']['precision'])
+    classify_result['Recall'].append(ada_report['macro avg']['recall'])
+    classify_result['F1 Score'].append(ada_report['macro avg']['f1-score'])
 
     #KNEIGHBOURS CLASSIFIER    
     y_pred = KNeighborsClassifier.predict(x_test)
     knn_report = metrics.classification_report(y_test, y_pred, output_dict = True)
     
-    result['Models'].append("KNeighborsClassifier")
-    result['Accuracy'].append(knn_report['accuracy'])
-    result['Precision'].append(knn_report['macro avg']['precision'])
-    result['Recall'].append(knn_report['macro avg']['recall'])
-    result['F1 Score'].append(knn_report['macro avg']['f1-score'])
+    classify_result['Models'].append("KNeighborsClassifier")
+    classify_result['Accuracy'].append(knn_report['accuracy'])
+    classify_result['Precision'].append(knn_report['macro avg']['precision'])
+    classify_result['Recall'].append(knn_report['macro avg']['recall'])
+    classify_result['F1 Score'].append(knn_report['macro avg']['f1-score'])
 
 #Converting the DataFrame
     
-    result = dict(sorted(result.items(), key=lambda item: item[1]))
+    classify_result = dict(sorted(classify_result.items(), key=lambda item: item[1]))
     
-    result_df = pd.DataFrame(result, index = None)
+    classify_result_df = pd.DataFrame(classify_result, index = None)
     
-    st.write(result_df)
+    st.write(classify_result_df)
     
     #Pickle files
     pickles = {}
