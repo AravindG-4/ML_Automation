@@ -1,5 +1,7 @@
 import streamlit as st
 from handle_categorical_features import *
+from numeric_handler import *
+from train_models import *
 
 
 
@@ -28,14 +30,12 @@ def remove_columns(dataframe,features):
     for feature in features:
         features_to_remove = []
         if dataframe[feature].isnull().sum() >= (0.5 * len(dataframe)):
-            st.write(f"In remove columns removed feature {feature}")
-        features = [feature for feature in features if feature not in features_to_remove]
+         features = [feature for feature in features if feature not in features_to_remove]
     
     global_dataframe = dataframe[features]
     
 
 def remove_features_with_priority(global_dataframe , global_features , number):
-    st.write("In remove columns")
     null_amount = dict()
 
     for feature in global_features:
@@ -61,8 +61,7 @@ def set_global_processing_dataframe(dataframe,features):
 
 
 
-def update_categorical_dataframe(dataframe):
-    global_dataframe = dataframe
+
 
 
 def start_preprocessing(dataframe,features,number,preferrence,target):
@@ -82,11 +81,11 @@ def start_preprocessing(dataframe,features,number,preferrence,target):
        st.write("In Select no of features")
 
        remove_features_with_priority(global_dataframe,global_features,number)
-   st.write(global_categorical_features)
    
    
    categoric_handler(dataframe,preferrence,target,global_categorical_features)
-   update_categorical_dataframe(get_categorical_dataframe())
-   
-   
-   st.write(get_categorical_dataframe())
+   categoric_dataframe = get_categorical_dataframe()
+   numeric_dataframe = get_numeric_dataframe(dataframe, preferrence, target, global_numerical_features , number)
+
+   final_dataframe = pd.concat([categoric_dataframe , numeric_dataframe],axis = 1)
+   return final_dataframe

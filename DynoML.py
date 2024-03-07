@@ -8,6 +8,7 @@ import json
 from pandas.errors import ParserError
 from script_functions import *
 from preprocessing import *
+from train_models import *
 
 # Defining the App title
 
@@ -72,4 +73,20 @@ if uploaded_file is not None:
     if user_dataframe is not None:
         if check_problem_type(dataframe,target,user_preferred_features,number):
             if st.button('Start Preprocessing'):
-                start_preprocessing(dataframe,features,number,preferrence,target)
+               final_dataframe = start_preprocessing(dataframe,features,number,preferrence,target)
+               if final_dataframe is not None:
+                   start_training(final_dataframe , target)
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

@@ -29,12 +29,8 @@ def fill_categorical_null(dataframe,feature):
     if dataframe[feature].isnull().sum() < (0.35 * len(dataframe)):
         
         
-        print("Before")
-        print(dataframe[feature])
         dataframe[feature].fillna(value = dataframe[feature].mode()[0],inplace = True)
-        handle_categorical_features.update_dataframe(dataframe)    
-        print(f"Filled null values of feature {feature} with class '{dataframe[feature].mode()[0]}'")
-        print('After')
+        handle_categorical_features.update_categorical_dataframe(dataframe)    
         st.write((dataframe[feature]))
         
 
@@ -58,7 +54,7 @@ def encode_features(dataframe,feature):
 
     dataframe[feature] = dataframe[feature].map(d)
 
-    handle_categorical_features.update_dataframe(dataframe)
+    handle_categorical_features.update_categorical_dataframe(dataframe)
 
 #*********************************************************************************************************************8
 
@@ -99,14 +95,14 @@ def create_rare_class(dataframe , feature):
         dataframe[feature] = dataframe[feature].map(d)
         dataframe[feature].fillna(value = 'Rare', inplace = True)
 
-    handle_categorical_features.update_dataframe(dataframe)    
+    handle_categorical_features.update_categorical_dataframe(dataframe)    
 #*********************************************************************************************************************8
 
 
 def fill_feature_with_more_null(dataframe,feature):
 
     dataframe[feature].fillna(value = 'Missing')
-    handle_categorical_features.update_dataframe(dataframe)
+    handle_categorical_features.update_categorical_dataframe(dataframe)
     print(f"Filled null values of feature {feature} with class 'Missing'")
 
 
