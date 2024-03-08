@@ -64,37 +64,40 @@ def upload_file_in_db(uploaded_file,file_path):
 
 def read_dataset(file_extension,uploaded_file,file_path):
      #Create DataFrame acording the file format
+    try:
+        #To read XLSX file
+        if file_extension == "xlsx":
+            dataframe = pd.read_excel(uploaded_file)
 
-    #To read XLSX file
-    if file_extension == "xlsx":
-        dataframe = pd.read_excel(uploaded_file)
 
+        #To read CSV file
+        elif file_extension == "csv":
+            dataframe = pd.read_csv(uploaded_file)
 
-    #To read CSV file
-    elif file_extension == "csv":
-        dataframe = pd.read_csv(uploaded_file)
-
-        
-    #To read JSON file
-    elif file_extension == "json":
             
-    # Read JSON data from file
-        with open(file_path, 'r') as json_file:
-            data = json.load(json_file)
-            dataframe = pd.DataFrame(data,index = list(data.keys()))
+        #To read JSON file
+        elif file_extension == "json":
+                
+        # Read JSON data from file
+            with open(file_path, 'r') as json_file:
+                data = json.load(json_file)
+                dataframe = pd.DataFrame(data,index = list(data.keys()))
 
 
-    #To read TEXT file
-    elif file_extension == "txt":
-            try:
-                dataframe = pd.read_csv(uploaded_file, sep='\t')
-            except ParserError:
-                 st.error('Your data is in Unstructured format!!\n  Refresh and try again after structuring your data')
-                 st.stop()
-    st.write(dataframe)
-    return dataframe
+        #To read TEXT file
+        elif file_extension == "txt":
+                try:
+                    dataframe = pd.read_csv(uploaded_file, sep='\t')
+                except ParserError:
+                    st.error('Your data is in Unstructured format!!\n  Refresh and try again after structuring your data')
+                    st.stop()
+        st.write(dataframe)
+        return dataframe
 
+    except:
 
+        st.warning("Upload a valid file 🚨")
+        exit(0)
 
 #---------------------------------------------------
 
@@ -161,10 +164,15 @@ def check_problem_type(dataframe,target,user_preferred_features,number):
     n = len(dataframe[target].unique())
     if n < 25 :
         st.write("It is a Classification Dataset")
-        return True if len(user_preferred_features) else False
+        a = True if len(user_preferred_features) else False
+        st.write(a)
+        return  a
+    
 
     else:
         st.write("It is a Regression Dataset")
-        return True if len(user_preferred_features) else False
+        a = True if len(user_preferred_features) else False
+        st.write(a)
+        return  a
 
     

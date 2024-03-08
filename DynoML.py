@@ -10,6 +10,11 @@ from script_functions import *
 from preprocessing import *
 from train_models import *
 
+
+
+def set_state(i):
+    st.session_state.stage = i
+
 # Defining the App title
 
 st.title('DynoML')
@@ -19,8 +24,11 @@ st.title('DynoML')
 uploaded_file = upload_file()
 
 # Check for the file upload status
+
 check_uploaded_file(uploaded_file)
 
+if 'stage' not in st.session_state:
+    st.session_state.stage = 0
 
 if uploaded_file is not None:
     file_path = os.path.join("uploads", uploaded_file.name)
@@ -68,14 +76,19 @@ if uploaded_file is not None:
         user_dataframe = dataframe[user_preferred_features]
         if len(user_preferred_features):
             st.write("The selected features",user_dataframe)
-
+    final_dataframe = None
         # Check the type of problem
     if user_dataframe is not None:
         if check_problem_type(dataframe,target,user_preferred_features,number):
-            if st.button('Start Preprocessing'):
-               final_dataframe = start_preprocessing(dataframe,features,number,preferrence,target)
-               if final_dataframe is not None:
-                   start_training(final_dataframe , target)
+            
+            if user_dataframe is not None:
+                 if check_problem_type(dataframe,target,user_preferred_features,number):
+                    if st.button('Start Preprocessing and Training'):
+                             final_dataframe = start_preprocessing(dataframe,features,number,preferrence,target)
+                    if final_dataframe is not None:
+                        start_training(final_dataframe , target)
+                
+
 
 
 

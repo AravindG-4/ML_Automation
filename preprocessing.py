@@ -58,6 +58,9 @@ def set_global_processing_dataframe(dataframe,features):
     set_categorical_features(global_dataframe , global_features)
     set_numerical_features(global_dataframe , global_features)
     st.write("Set DataFrame",global_dataframe)
+    st.write(global_categorical_features)
+    st.write(global_numerical_features)
+
 
 
 
@@ -66,26 +69,29 @@ def set_global_processing_dataframe(dataframe,features):
 
 def start_preprocessing(dataframe,features,number,preferrence,target):
    
-   set_global_processing_dataframe(dataframe , features)
+ with st.spinner("Preprocessing the data..."):
+    set_global_processing_dataframe(dataframe , features)
 
 
-   if preferrence == 'Default':
-       st.write("In Default")
-       remove_columns(global_dataframe , global_categorical_features) 
+    if preferrence == 'Default':
+        st.write("In Default")
+        remove_columns(global_dataframe , global_categorical_features) 
 
 
-   elif preferrence == 'Select Own features':
-       st.write("In Select own features")
-       pass
-   elif preferrence == 'Selct Number of Features': 
-       st.write("In Select no of features")
+    elif preferrence == 'Select Own features':
+        st.write("In Select own features")
+        pass
+    elif preferrence == 'Selct Number of Features': 
+        st.write("In Select no of features")
 
-       remove_features_with_priority(global_dataframe,global_features,number)
-   
-   
-   categoric_handler(dataframe,preferrence,target,global_categorical_features)
-   categoric_dataframe = get_categorical_dataframe()
-   numeric_dataframe = get_numeric_dataframe(dataframe, preferrence, target, global_numerical_features , number)
+        remove_features_with_priority(global_dataframe,global_features,number)
+    
+    
+    categoric_handler(dataframe,preferrence,target,global_categorical_features)
+    categoric_dataframe = get_categorical_dataframe()
+    numeric_dataframe = get_numeric_dataframe(dataframe, preferrence, target, global_numerical_features , number)
 
-   final_dataframe = pd.concat([categoric_dataframe , numeric_dataframe],axis = 1)
-   return final_dataframe
+    final_dataframe = pd.concat([categoric_dataframe , numeric_dataframe],axis = 1)
+    st.success("Preprocessing completed ", icon="✅")
+    st.write(final_dataframe)
+    return final_dataframe

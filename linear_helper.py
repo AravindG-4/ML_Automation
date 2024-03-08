@@ -5,6 +5,8 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import RandomizedSearchCV
 from scipy.stats import uniform, randint
+import pickle
+
 
 
 
@@ -171,3 +173,18 @@ def knn_regression(x_train, y_train):
 
     return knn_regressor1
 
+
+def create_pickle(Model , Model_name):
+
+
+    # Assuming you have a model object named 'model'
+    model = Model  # Your model object
+
+    # File path where you want to save the pickle file
+    pickle_file_path = f'{Model_name}.pkl'
+
+    # Open a file in binary write mode and save the model using pickle
+    with open('pickles/' + pickle_file_path, 'wb') as f:
+        pickle.dump(model, f)
+        
+        return pickle_file_path

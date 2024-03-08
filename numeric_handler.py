@@ -5,6 +5,8 @@ from sklearn.preprocessing import StandardScaler
 
 # ------- Numeric Handler --------
 def get_numeric_dataframe(df, preference, target, num_feats, req_num_feats = None):
+
+
     total_df = df
     preference = preference
     # req_features = req_features
@@ -26,7 +28,9 @@ def get_numeric_dataframe(df, preference, target, num_feats, req_num_feats = Non
     
     for feature in num_feats:
         winsorize(data, feature)
-        
+
+    if len(df[target].unique()) >= 50:
+        data[target] = df[target]
     return data
         
     # global scaler
