@@ -8,7 +8,7 @@ from imblearn.over_sampling import SMOTEN
 from sklearn.preprocessing import StandardScaler
 from linear_models import *
 from classify_models import *
-from DynoML import number
+# import DynoML 
 
 global scaler 
 scaler = StandardScaler()
@@ -95,7 +95,7 @@ def feature_selection(x_train, y_train, num_features):
     return selected_feature_names
 
 
-def start_training(dataframe,target):
+def start_training(dataframe,target, number):
         
         st.write('In train models')
 
@@ -154,7 +154,6 @@ def start_training(dataframe,target):
                                     
             for model , path in dict.items():     
                     
-                    st.write(model , path)
                     st.write(f'***{model}***')
                     
                     st.download_button(f'Download',file_name= model+'.pkl' , data = open(path, 'rb').read())      

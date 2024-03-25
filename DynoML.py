@@ -86,7 +86,7 @@ if uploaded_file is not None:
                     if st.button('Start Preprocessing and Training'):
                              final_dataframe = start_preprocessing(dataframe,features,number,preferrence,target)
                     if final_dataframe is not None:
-                        start_training(final_dataframe , target)
+                        start_training(final_dataframe , target, number)
                 
 
 

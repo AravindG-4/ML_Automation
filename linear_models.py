@@ -84,7 +84,7 @@ def linear_models(x_train, y_train, x_test, y_test):
 
 
         
-        linear_result_df = pd.DataFrame(linear_result, index = None)
+        linear_result_df = pd.DataFrame(sorted_linear_result, index = None)
         
         st.write(linear_result_df)
         

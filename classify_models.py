@@ -103,8 +103,9 @@ def classification_models(x_train, y_train, x_test, y_test):
             'Recall': [item[3] for item in sorted_data],
             'F1 Score': [item[4] for item in sorted_data]
         }
+    
             
-            classify_result_df = pd.DataFrame(data, index = None)
+            classify_result_df = pd.DataFrame(sorted_classify_result , columns = sorted_classify_result.keys())
             
             st.write(classify_result_df)
             

@@ -163,16 +163,13 @@ def check_problem_type(dataframe,target,user_preferred_features,number):
 
     n = len(dataframe[target].unique())
     if n < 25 :
-        st.write("It is a Classification Dataset")
         a = True if len(user_preferred_features) else False
-        st.write(a)
+    
         return  a
     
 
     else:
-        st.write("It is a Regression Dataset")
         a = True if len(user_preferred_features) else False
-        st.write(a)
         return  a
 
     
